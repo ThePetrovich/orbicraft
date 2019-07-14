@@ -1,0 +1,16 @@
+CFLAGS = -Wall -I. -fpic -g -O2 -rdynamic -std=c11
+LDFLAGS = -lm -ldl
+TARGET = ./build/schsatutils
+SRCS = $(wildcard schsat-utils/src/*.c)
+OBJS = $(SRCS:.c=.o)
+INC = schsat-utils/include/shcsat-utils.h
+.PHONY: all clean cleanall
+all: $(TARGET)
+$(TARGET): $(OBJS)
+	        $(CC) -o $(TARGET) $(OBJS) $(CFLAGS) -I $(INC)
+.c.o:
+	        $(CC) $(CFLAGS)  -c $< -o $@
+clean:
+	        rm -rf $(OBJS)
+cleanall:
+			rm -rf $(TARGET) $(OBJS)

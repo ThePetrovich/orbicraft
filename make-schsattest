@@ -1,0 +1,23 @@
+CFLAGS = -Wall -I. -fpic -g -O2 -rdynamic -std=c11
+LDFLAGS = -lm -ldl
+TARGET1 = ./build/schsat-test1
+TARGET2 = ./build/schsat-test2
+TARGET3 = ./build/schsat-test3
+SRCS1 = ./schsat-test/src/test1.c
+SRCS2 = ./schsat-test/src/test2.c
+SRCS3 = ./schsat-test/src/test3.c
+OBJS1 = $(SRCS1:.c=.o)
+OBJS2 = $(SRCS2:.c=.o)
+OBJS3 = $(SRCS3:.c=.o)
+.PHONY: clean cleanall test1 test2 test3
+test1: $(TARGET1)
+$(TARGET1): $(OBJS1)
+	        $(CC) -o $(TARGET1) $(OBJS1) $(CFLAGS)
+test2: $(TARGET2)
+$(TARGET2): $(OBJS2)
+			$(CC) -o $(TARGET2) $(OBJS2) $(CFLAGS)
+test3: $(TARGET3)
+$(TARGET3): $(OBJS3)
+			$(CC) -o $(TARGET3) $(OBJS3) $(CFLAGS)
+.c.o:
+	        $(CC) $(CFLAGS)  -c $< -o $@

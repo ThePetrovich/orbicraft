@@ -1,0 +1,15 @@
+CFLAGS = -Wall -I. -fpic -g -O2 -rdynamic -std=c11
+LDFLAGS = -lm -lschsat -lschsat-dev -ldl
+TARGET = ./build/schsatcmd
+SRCS = $(wildcard schsat-cmdlistener/src/*.c)
+OBJS = $(SRCS:.c=.o)
+.PHONY: all clean cleanall
+all: $(TARGET)
+$(TARGET): $(OBJS)
+	        $(CC) -o $(TARGET) $(OBJS) $(CFLAGS)
+.c.o:
+	        $(CC) $(CFLAGS)  -c $< -o $@
+clean:
+	        rm -rf $(OBJS)
+cleanall:
+			rm -rf $(TARGET) $(OBJS)
