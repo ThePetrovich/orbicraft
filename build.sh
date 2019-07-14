@@ -17,3 +17,6 @@ echo "Done!"
 echo "Cleaning"
 make -f make-schsatutils clean > /dev/null
 make -f make-schsatd clean > /dev/null
+make -f make-schsattest clean > /dev/null
+make -f make-photos clean > /dev/null
+make -f make-schsatcmd clean > /dev/null

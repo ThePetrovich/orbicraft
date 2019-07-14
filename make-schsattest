@@ -21,3 +21,5 @@ $(TARGET3): $(OBJS3)
 			$(CC) -o $(TARGET3) $(OBJS3) $(CFLAGS)
 .c.o:
 	        $(CC) $(CFLAGS)  -c $< -o $@
+clean:
+	rm -rf $(OBJS1) $(OBJS2) $(OBJS3)
