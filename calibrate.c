@@ -69,7 +69,7 @@ float dataX[2] = {0}, dataY[2] = {0}, dataZ[2] = {0};
 	}
 	float newAvgX = newSumX / 100.0, newAvgY = newSumY / 100.0, newAvgZ = newSumZ / 100.0;
 	printf("Current average values is: X: %f ; Y: %f ; Z: %f \n", newAvgX, newAvgY, newAvgZ);
-	if (abs(newAvgX) >= 1.5 || abs(newAvgY) >= 1.5 || abs(newAvgZ) >= 1.5)
+	if (abs(newAvgX) >= 0.1 || abs(newAvgY) >= 0.1 || abs(newAvgZ) >= 0.1)
 	{
 		printf("Average values are too long away from 0, calibrating again.");
 		control();
