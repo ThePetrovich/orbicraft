@@ -3,13 +3,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdarg.h>
-#include <sys/file.h>
-#include <sys/resource.h>
-#include <execinfo.h>
 #include <unistd.h>
-#include <errno.h>
-#include <wait.h>
-#include <ucontext.h>
 
 int main(){
 	char cmdbuf[200];
@@ -19,7 +13,7 @@ int main(){
 	char exp[6][16] = {"off", "auto", "night", "nightpreview", "verylong"};
 	for(int i = 0; i < 16; i++){
 		printf("ISO calibration image #%d (no lights)\n", n);
-		sprintf(cmdbuf, "raspistill -o img%d.jpg -ISO %d", n, 100 + 50*i);
+		sprintf(cmdbuf, "raspistill -t 1000 -v -o img%d.jpg -ISO %d", n, 100 + 50*i);
 		printf("%s\n", cmdbuf);
 		system(cmdbuf);
 		n++;
@@ -29,7 +23,7 @@ int main(){
 	sleep(10);
 	for(int i = 0; i < 16; i++){
 		printf("ISO calibration image #%d (with lights)\n", n);
-		sprintf(cmdbuf, "raspistill -o img%d.jpg -ISO %d", n, 100 + 50*i);
+		sprintf(cmdbuf, "raspistill -t 1000 -v -o img%d.jpg -ISO %d", n, 100 + 50*i);
 		printf("%s\n", cmdbuf);
 		system(cmdbuf);
 		n++;
@@ -39,13 +33,13 @@ int main(){
 	scanf("%d", &iso);
 	for(int i = 0; i < 5; i++){
 		printf("Exposure calibration image #%d (no lights)\n", n);
-		sprintf(cmdbuf, "raspistill -o img%d.jpg -ISO %d -ex %s", n, iso, exp[i]);
+		sprintf(cmdbuf, "raspistill -t 1000 -v -o img%d.jpg -ISO %d -ex %s", n, iso, exp[i]);
 		printf("%s\n", cmdbuf);
 		system(cmdbuf);
 		n++;
 		sleep(1);
 		printf("Exposure calibration image #%d (no lights)\n", n);
-		sprintf(cmdbuf, "raspistill -o img%d.jpg -ISO %d -ex %s", n, iso, exp[i]);
+		sprintf(cmdbuf, "raspistill -t 1000 -v -o img%d.jpg -ISO %d -ex %s", n, iso, exp[i]);
 		printf("%s\n", cmdbuf);
 		system(cmdbuf);
 		n++;
@@ -55,13 +49,13 @@ int main(){
 	sleep(10);
 	for(int i = 0; i < 5; i++){
 		printf("Exposure calibration image #%d (with lights)\n", n);
-		sprintf(cmdbuf, "raspistill -o img%d.jpg -ISO %d -ex %s", n, iso, exp[i]);
+		sprintf(cmdbuf, "raspistill -t 1000 -v -o img%d.jpg -ISO %d -ex %s", n, iso, exp[i]);
 		printf("%s\n", cmdbuf);
 		system(cmdbuf);
 		n++;
 		sleep(1);
 		printf("Exposure calibration image #%d (with lights)\n", n);
-		sprintf(cmdbuf, "raspistill -o img%d.jpg -ISO %d -ex %s", n, iso, exp[i]);
+		sprintf(cmdbuf, "raspistill -t 1000 -v -o img%d.jpg -ISO %d -ex %s", n, iso, exp[i]);
 		printf("%s\n", cmdbuf);
 		system(cmdbuf);
 		n++;
