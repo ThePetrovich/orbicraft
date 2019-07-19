@@ -1,32 +1,29 @@
 #include "libschsat.h"
 
-void qs(float *s_arr, int first, int last)
+void bsort ( float* ptr, int n )
 {
-    if (first < last)
-    {
-        float left = first, right = last, middle = s_arr[(left + right) / 2];
-        do
-        {
-            while (s_arr[left] < middle) left++;
-            while (s_arr[right] > middle) right--;
-            if (left <= right)
-            {
-                float tmp = s_arr[left];
-                s_arr[left] = s_arr[right];
-                s_arr[right] = tmp;
-                left++;
-                right--;
-            }
-        } while (left <= right);
-        qs(s_arr, first, right);
-        qs(s_arr, left, last);
-    }
+  void order ( float*, float* );        
+  int j, k;                           
+ 
+  for ( int j = 0; j < n - 1; j++ ) 
+    for ( int k = j + 1; k < n; k++ ) 
+      order ( ptr + j, ptr + k );    
+}
+
+void order ( float* numb1, float* numb2 ) 
+{
+  if ( *numb1 > *numb2 )           
+                                      
+  {
+    float temp = *numb1;
+    *numb1 = *numb2;
+    *numb2 = temp;
+  }
 }
 
 void control()
 {
 float dataX[100] = {0}, dataY[100] = {0}, dataZ[100] = {0};
-	float sumX = 0, sumY = 0, sumZ = 0;
 	puts ("Calibrating, estimated time: ~100 sec...");
 	for (int i = 0; i < 100; i++)
 	{	
@@ -59,7 +56,9 @@ float dataX[100] = {0}, dataY[100] = {0}, dataZ[100] = {0};
 		}
 		Sleep(1);
 	}
-	qs(dataX,0,99); qs(dataY,0,99); qs(dataZ,0,99);
+	puts("sorting...");
+	bsort(dataX,100); bsort(dataY,100); bsort(dataZ,100);
+	puts("sorted!");
 	float avgX = (dataX[49] + dataX[50]) / 2.0, avgY = (dataY[49] + dataY[50]) / 2.0, avgZ = (dataZ[49] + dataZ[50]) / 2.0;
 	printf ("Average values was: X: %f ; Y: %f ; Z: %f\n", avgX, avgY, avgZ);
 	Sleep(5);
